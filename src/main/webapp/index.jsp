@@ -7,14 +7,13 @@
 <html>
 <header>
     <title>
-        Привет из JSP!
+        Hi!
     </title>
 </header>
 <body>
     <h2>
         <%
-            InitialContext ctx = new InitialContext();
-            EJBLogic ejbLogic = (EJBLogic) ctx.lookup("java:global/webapp/EJBLogic");
+            EJBLogic ejbLogic = new EJBLogic();
             File currentClass = new File(URLDecoder.decode(EJBLogic.class
                     .getProtectionDomain()
                     .getCodeSource()
