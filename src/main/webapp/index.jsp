@@ -7,7 +7,7 @@
 <html>
 <header>
     <title>
-        Hi!
+        Hi, there!
     </title>
 </header>
 <body>
