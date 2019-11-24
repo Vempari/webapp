@@ -1,6 +1,21 @@
 version: '3'
 services:
+#  maven:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile-mvn
+#    volumes:
+#      - 'myshare:/shared'
+
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
+#    volumes:
+#      - 'myshare:/shared'
+#
+#volumes:
+#  myshare:
+#    driver: local
