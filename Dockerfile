@@ -1,14 +1,11 @@
 FROM maven:3.6.1-jdk-8-alpine AS mavenbuildfirst
 COPY . webapp
 RUN cd webapp && mvn clean install
-RUN cd /webapp/target/ && ls
 EXPOSE 5555
 
 
-FROM tomcat:9-jre8-alpine
-RUN cd /usr/local/tomcat/webapps && ls
-COPY --from=mavenbuildfirst /webapp/target/webapp.war /usr/local/tomcat/webapps/
-RUN cd /usr/local/tomcat/webapps && ls
-WORKDIR /usr/local/tomcat
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+FROM jboss/wildfly
+COPY --from=mavenbuildfirst /webapp/target/webapp.war /opt/jboss/wildfly/standalone/deployments/
+RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#70365 --silent
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+EXPOSE 9990
