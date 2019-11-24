@@ -1,10 +1,8 @@
-#FROM maven:latest AS mainmaven
-#COPY lib webapp
-#COPY src webapp
-#COPY pom.xml webapp
-#RUN cd webapp && mvn clean install
-#RUN cp webapp/target/webapp.war /shared
-#RUN cd && ls
-#RUN cd /webapp/target/ && ls
-#EXPOSE 5555
+FROM maven:latest
+COPY lib webapp
+COPY src webapp
+COPY pom.xml webapp
+RUN cd webapp && mvn clean install
+RUN cd /webapp/target/ && ls
+EXPOSE 5555
 
